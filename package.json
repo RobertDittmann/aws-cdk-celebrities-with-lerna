@@ -8,10 +8,17 @@
     "synth:pipeline:prod": "lerna run synth:pipeline:prod --stream --",
     "synth:pipeline:staging": "lerna run synth:pipeline:test --stream --",
     "synth:pipeline:branch": "lerna run synth:pipeline:prod --stream --",
+
+    "synth:stack:test": "lerna run synth:stack:test --stream --",
+    "synth:stack:prod": "lerna run synth:stack:prod --stream --",
+    "synth:stack:staging": "lerna run synth:stack:staging --stream --",
+    "synth:stack:branch": "lerna run synth:stack:branch --stream --",
+
     "deploy:pipeline:test": "lerna run deploy:pipeline:test --stream --",
     "deploy:pipeline:prod": "lerna run deploy:pipeline:prod --stream --",
     "deploy:pipeline:staging": "lerna run deploy:pipeline:test --stream --",
     "deploy:pipeline:branch": "lerna run deploy:pipeline:prod --stream --",
+
     "build:lambda": "lerna run build:lambda --stream --parallel --",
     "test:lambda": "lerna run test:lambda --stream --parallel --"
   },
