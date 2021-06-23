@@ -5,10 +5,6 @@ import * as codebuild from "@aws-cdk/aws-codebuild";
 export interface RebuildPipelineProjectProps {
     readonly envName: string;
     readonly role: iam.Role;
-    readonly branchName: string;
-    readonly repo: string;
-    readonly repoOwner: string;
-    readonly repoSecretName: string;
 }
 
 export class RebuildPipelineProject extends Construct {
@@ -37,15 +33,7 @@ export class RebuildPipelineProject extends Construct {
             role: props.role,
             environment: {
                 buildImage: codebuild.LinuxBuildImage.STANDARD_5_0,
-            },
-            environmentVariables: {
-                ENV_NAME: {value: props.envName},
-                BRANCH_NAME: {value: props.branchName},
-                REPO: {value: props.repo},
-                REPO_OWNER: {value: props.repoOwner},
-                REPO_SECRET_NAME: {value: props.repoSecretName},
-                TEST_PLACE: {value: 'PROJECT'},
-            } // to always rebuilt for the same environment !!
+            }
         });
     }
 }

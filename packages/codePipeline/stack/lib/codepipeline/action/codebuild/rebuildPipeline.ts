@@ -22,11 +22,7 @@ export class RebuildPipeline extends Construct {
 
         const rebuildPipelineProject = new RebuildPipelineProject(this, 'RebuildPipelineProject', {
             role: props.role,
-            envName: `${props.envName}`,
-            branchName: `${props.branchName}`,
-            repo: `${props.repo}`,
-            repoOwner: `${props.repoOwner}`,
-            repoSecretName: `${props.repoSecretName}`
+            envName: `${props.envName}`
         });
 
         this.action = new codepipeline_actions.CodeBuildAction({
