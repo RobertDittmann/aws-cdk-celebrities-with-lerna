@@ -8,8 +8,5 @@
     "test:lambda": "echo TEST-generator"
   },
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "random": "^3.0.6"
-  }
+  "license": "ISC"
 }
