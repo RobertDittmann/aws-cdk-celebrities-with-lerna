@@ -4,7 +4,7 @@ import {PipelineS3Bucket} from "./s3/pipelineS3Bucket";
 import {GithubAction} from "./codepipeline/action/source/githubAction";
 import {RebuildPipeline} from "./codepipeline/action/codebuild/rebuildPipeline";
 import * as codepipeline from "@aws-cdk/aws-codepipeline";
-import {BuildCelebritiesRekognitionStack} from "./codepipeline/action/codebuild/buildCelebritiesRekognitionStack";
+import {DeployStacks} from "./codepipeline/action/codebuild/deployStacks";
 import {LambdaBuildAndTest} from "./codepipeline/action/codebuild/lambdaBuildAndTest";
 import {BuildAgwStack} from "./codepipeline/action/codebuild/buildAgwStack";
 
@@ -58,17 +58,11 @@ export class AwsCdkCodePipelineStack extends Stack {
         });
 
         // STACKS
-        const deployCelebritiesRekognitionStack = new BuildCelebritiesRekognitionStack(this, 'DeployCelebritiesRekognition', {
+        const deployStacks = new DeployStacks(this, 'DeployStacks', {
             role: pipelineRoles.adminRoleForCodeBuild,
             envName: `${props?.envName}`,
             source: githubAction.source,
         });
-
-        // const buildAgwStack = new BuildAgwStack(this, 'DeployAgw', {
-        //     source: githubAction.source,
-        //     role: pipelineRoles.adminRoleForCodeBuild,
-        //     envName: `${props?.envName}`
-        // });
 
         new codepipeline.Pipeline(this, `Pipeline`, {
             pipelineName: `${props?.envName}-Pipeline`,
@@ -96,8 +90,7 @@ export class AwsCdkCodePipelineStack extends Stack {
                 {
                     stageName: 'Deploy',
                     actions: [
-                        deployCelebritiesRekognitionStack.action,
-                        // buildAgwStack.action
+                        deployStacks.action
                     ],
                 }
             ],

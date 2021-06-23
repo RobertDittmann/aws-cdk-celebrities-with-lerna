@@ -7,7 +7,7 @@ export interface BuildCelebritiesRekognitionProjectProps {
     readonly role: iam.Role;
 }
 
-export class BuildCelebritiesRekognitionProject extends Construct {
+export class DeployStacksProject extends Construct {
     public readonly project: codebuild.PipelineProject;
 
     constructor(app: Construct, id: string, props: BuildCelebritiesRekognitionProjectProps) {

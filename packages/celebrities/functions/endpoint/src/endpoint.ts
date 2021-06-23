@@ -1,10 +1,10 @@
-const DynamodbClient = require('aws-sdk/clients/dynamodb');
+import * as sdk from 'aws-sdk';
 const random = require('random');
-const dynamodb = new DynamodbClient.DocumentClient();
+const dynamodb = new sdk.DynamoDB.DocumentClient();
 
-const TABLE_NAME = process.env.TABLE_NAME;
+const TABLE_NAME = process.env.TABLE_NAME ? process.env.TABLE_NAME : '';
 
-exports.handler = async (event) => {
+exports.handler = async (event: any) => {
     console.log(`Trying to process the event: ${JSON.stringify(event)}`)
 
     const results = await dynamodb.get({

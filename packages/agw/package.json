@@ -1,5 +1,5 @@
 {
-  "name": "celebrities",
+  "name": "agw",
   "version": "1.0.0",
   "private": true,
   "description": "> TODO: description",
@@ -25,6 +25,7 @@
     "aws-lambda-nodejs-esbuild": "^1.1.5"
   },
   "dependencies": {
+    "celebrities": "1.0.0",
     "@bright-blue/aws-cdk-config": "1.0.0",
     "@bright-blue/common-config": "1.0.0"
   }

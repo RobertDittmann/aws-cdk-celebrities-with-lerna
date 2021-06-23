@@ -1,15 +1,13 @@
 const path = require('path');
-const S3Client = require('aws-sdk/clients/s3');
-const RekognitionClient = require('aws-sdk/clients/rekognition');
-const DynamodbClient = require('aws-sdk/clients/dynamodb');
+import * as sdk from 'aws-sdk';
 
-const s3 = new S3Client();
-const rekognition = new RekognitionClient();
-const dynamodb = new DynamodbClient.DocumentClient();
+const s3 = new sdk.S3();
+const rekognition = new sdk.Rekognition();
+const dynamodb = new sdk.DynamoDB.DocumentClient();
 
-const TABLE_NAME = process.env.TABLE_NAME;
+const TABLE_NAME = process.env.TABLE_NAME ? process.env.TABLE_NAME : '';
 
-exports.handler = async (event) => {
+exports.handler = async (event: any) => {
     for (const image of event.Records) {
         console.log(`Trying to process the image: ${JSON.stringify(image)}`);
         const bucket = image.s3.bucket.name;
@@ -28,7 +26,7 @@ exports.handler = async (event) => {
     }
 };
 
-const getImage = async (bucket, key) => {
+const getImage = async (bucket:string, key:string) => {
     console.log('Trying to download the image');
     const image = await s3.getObject({
         Bucket: bucket,
@@ -37,7 +35,7 @@ const getImage = async (bucket, key) => {
     return image.Body;
 };
 
-const getCelebrityMetadata = async (image) => {
+const getCelebrityMetadata = async (image: any) => {
     console.log('Trying to recognize the celebrity on the image');
     const params = {
         Image: {
@@ -49,7 +47,7 @@ const getCelebrityMetadata = async (image) => {
     return results.CelebrityFaces;
 };
 
-const saveMetadata = async (key, metadata) => {
+const saveMetadata = async (key: string, metadata:any) => {
     console.log('Trying to save the metadata to database');
     const fileName = path.parse(key).name;
     return dynamodb.put({
