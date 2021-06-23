@@ -19,6 +19,11 @@
     "deploy:pipeline:staging": "lerna run deploy:pipeline:test --stream --",
     "deploy:pipeline:branch": "lerna run deploy:pipeline:prod --stream --",
 
+    "deploy:stack:test": "lerna run deploy:stack:test --stream --",
+    "deploy:stack:prod": "lerna run deploy:stack:prod --stream --",
+    "deploy:stack:staging": "lerna run deploy:stack:staging --stream --",
+    "deploy:stack:branch": "lerna run deploy:stack:branch --stream --",
+
     "build:lambda": "lerna run build:lambda --stream --parallel --",
     "test:lambda": "lerna run test:lambda --stream --parallel --"
   },
