@@ -64,38 +64,40 @@ export class AwsCdkCodePipelineStack extends Stack {
             source: githubAction.source,
         });
 
-        new codepipeline.Pipeline(this, `Pipeline`, {
+        const pipeline = new codepipeline.Pipeline(this, `Pipeline`, {
             pipelineName: `${props?.envName}-Pipeline`,
             artifactBucket: pipelineArtifactsBucket.bucket,
-            role: pipelineRoles.adminRoleForCodePipeline,
-            stages: [
-                {
-                    stageName: 'Source',
-                    actions: [
-                        githubAction.action
-                    ],
-                },
-                {
-                    stageName: 'Pipeline_Update',
-                    actions: [
-                        updatePipeline.action
-                    ],
-                },
-                {
-                    stageName: 'Build_and_Test',
-                    actions: [
-                        lambdaBuildAndTest.action
-                    ],
-                },
-                {
-                    stageName: 'Deploy',
-                    actions: [
-                        deployStacks.action
-                    ],
-                }
-            ],
-
+            role: pipelineRoles.adminRoleForCodePipeline
         });
 
+       pipeline.addStage({
+            stageName: 'Source',
+            actions: [
+                githubAction.action
+            ],
+        });
+
+        if (props?.envName !== 'prod' && props?.envName !== 'staging') {
+            pipeline.addStage({
+                stageName: 'Pipeline_Update',
+                actions: [
+                    updatePipeline.action
+                ],
+            });
+        }
+
+        pipeline.addStage({
+            stageName: 'Build_and_Test',
+            actions: [
+                lambdaBuildAndTest.action
+            ],
+        });
+
+        pipeline.addStage({
+            stageName: 'Deploy',
+            actions: [
+                deployStacks.action
+            ],
+        });
     }
 }
