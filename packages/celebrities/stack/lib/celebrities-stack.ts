@@ -45,7 +45,7 @@ export class CelebritiesStack extends cdk.Stack {
         // LAMBDAS
         const generatorFunction = new NodejsFunction(this, 'LambdaGenerator', {
                 runtime: lambda.Runtime.NODEJS_14_X,
-                handler: '../../functions/generator/src/generator.handler',
+                handler: 'packages/celebrities/functions/generator/src/generator.handler',
                 environment: {
                     'TABLE_NAME': table.tableName
                 },
@@ -54,7 +54,7 @@ export class CelebritiesStack extends cdk.Stack {
 
         const endpointFunction = new NodejsFunction(this, 'LambdaEndpoint', {
             runtime: lambda.Runtime.NODEJS_14_X,
-            handler: '../../functions/generator/src/endpoint.handler',
+            handler: 'packages/celebrities/functions/endpoint/src/endpoint.handler',
             environment: {
                 'TABLE_NAME': table.tableName
             },

@@ -9,14 +9,14 @@
   "main": "lib/celebrities.js",
 
   "scripts": {
-    "synth:stack:test": "NODE_ENV=test cdk synth AwsCdkCodePipelineStack",
-    "synth:stack:prod": "NODE_ENV=prod cdk synth AwsCdkCodePipelineStack",
-    "synth:stack:staging": "NODE_ENV=staging cdk synth AwsCdkCodePipelineStack",
-    "synth:stack:branch": "NODE_ENV=branch cdk synth AwsCdkCodePipelineStack",
-    "deploy:stack:test": "NODE_ENV=test cdk deploy --require-approval never AwsCdkCodePipelineStack",
-    "deploy:stack:prod": "NODE_ENV=prod cdk deploy --require-approval never AwsCdkCodePipelineStack",
-    "deploy:stack:staging": "NODE_ENV=staging cdk deploy --require-approval never AwsCdkCodePipelineStack",
-    "deploy:stack:branch": "NODE_ENV=branch cdk deploy --require-approval never AwsCdkCodePipelineStack"
+    "synth:stack:test": "NODE_ENV=test cdk synth CelebritiesStack",
+    "synth:stack:prod": "NODE_ENV=prod cdk synth CelebritiesStack",
+    "synth:stack:staging": "NODE_ENV=staging cdk synth CelebritiesStack",
+    "synth:stack:branch": "NODE_ENV=branch cdk synth CelebritiesStack",
+    "deploy:stack:test": "NODE_ENV=test cdk deploy --require-approval never CelebritiesStack",
+    "deploy:stack:prod": "NODE_ENV=prod cdk deploy --require-approval never CelebritiesStack",
+    "deploy:stack:staging": "NODE_ENV=staging cdk deploy --require-approval never CelebritiesStack",
+    "deploy:stack:branch": "NODE_ENV=branch cdk deploy --require-approval never CelebritiesStack"
   },
 
   "devDependencies": {
