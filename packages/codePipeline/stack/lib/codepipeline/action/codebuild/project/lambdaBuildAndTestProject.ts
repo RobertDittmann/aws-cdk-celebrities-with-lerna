@@ -12,6 +12,11 @@ export class LambdaBuildAndTestProject extends Construct {
             buildSpec: codebuild.BuildSpec.fromObject({
                 version: '0.2',
                 phases: {
+                    install: {
+                        commands: [
+                            'yarn run ci'
+                        ],
+                    },
                     build: {
                         commands: [
                             'yarn build:lambda',
