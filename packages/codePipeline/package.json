@@ -1,0 +1,30 @@
+{
+  "name": "code_pipeline",
+  "version": "0.1.0",
+  "private": true,
+  "bin": {
+    "awsCdkCodePipeline": "stack/bin/awsCdkCodePipeline.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "jest",
+    "cdk": "cdk",
+    "synth:pipeline:test": "NODE_ENV=test cdk synth AwsCdkCodePipelineStack",
+    "synth:pipeline:prod": "NODE_ENV=prod cdk synth AwsCdkCodePipelineStack",
+    "synth:pipeline:staging": "NODE_ENV=staging cdk synth AwsCdkCodePipelineStack",
+    "synth:pipeline:branch": "NODE_ENV=branch cdk synth AwsCdkCodePipelineStack",
+    "deploy:pipeline:test": "NODE_ENV=test cdk deploy --require-approval never AwsCdkCodePipelineStack",
+    "deploy:pipeline:prod": "NODE_ENV=prod cdk deploy --require-approval never AwsCdkCodePipelineStack",
+    "deploy:pipeline:staging": "NODE_ENV=staging cdk deploy --require-approval never AwsCdkCodePipelineStack",
+    "deploy:pipeline:branch": "NODE_ENV=branch cdk deploy --require-approval never AwsCdkCodePipelineStack"
+  },
+  "devDependencies": {
+    "@bright-blue/aws-cdk-config": "1.0.0",
+    "@bright-blue/common-config": "1.0.0"
+  },
+  "dependencies": {
+    "@bright-blue/aws-cdk-config": "1.0.0",
+    "@bright-blue/common-config": "1.0.0"
+  }
+}

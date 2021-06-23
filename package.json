@@ -1,0 +1,20 @@
+{
+  "name": "root",
+  "private": true,
+  "license": "ISC",
+  "scripts": {
+    "ci": "yarn install",
+    "synth:pipeline:test": "lerna run synth:pipeline:test --stream --",
+    "synth:pipeline:prod": "lerna run synth:pipeline:prod --stream --",
+    "synth:pipeline:staging": "lerna run synth:pipeline:test --stream --",
+    "synth:pipeline:branch": "lerna run synth:pipeline:prod --stream --",
+    "deploy:pipeline:test": "lerna run deploy:pipeline:test --stream --",
+    "deploy:pipeline:prod": "lerna run deploy:pipeline:prod --stream --",
+    "deploy:pipeline:staging": "lerna run deploy:pipeline:test --stream --",
+    "deploy:pipeline:branch": "lerna run deploy:pipeline:prod --stream --"
+  },
+  "workspaces": [
+    "packages/*",
+    "packages/common/*"
+  ]
+}

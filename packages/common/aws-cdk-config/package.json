@@ -1,0 +1,24 @@
+{
+  "name": "@bright-blue/aws-cdk-config",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Common dependencies for AWS CDK",
+  "author": "Robert Dittmann <robert.dittmann@merapar.com>",
+  "license": "ISC",
+
+  "devDependencies": {
+    "@aws-cdk/assert": "1.108.1",
+    "aws-cdk": "1.108.1"
+  },
+
+  "dependencies": {
+    "@aws-cdk/aws-apigatewayv2": "1.108.1",
+    "@aws-cdk/aws-apigatewayv2-integrations": "1.108.1",
+    "@aws-cdk/aws-codepipeline-actions": "1.108.1",
+    "@aws-cdk/aws-dynamodb": "1.108.1",
+    "@aws-cdk/aws-iam": "1.108.1",
+    "@aws-cdk/aws-lambda-event-sources": "1.108.1",
+    "@aws-cdk/aws-ssm": "1.108.1",
+    "@aws-cdk/core": "1.108.1"
+  }
+}
