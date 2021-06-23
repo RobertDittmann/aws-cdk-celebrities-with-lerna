@@ -8,15 +8,15 @@
   "license": "ISC",
 
   "scripts": {
-    "synth:stack:test": "NODE_ENV=test cdk synth CelebritiesStack",
-    "synth:stack:prod": "NODE_ENV=prod cdk synth CelebritiesStack",
-    "synth:stack:staging": "NODE_ENV=staging cdk synth CelebritiesStack",
-    "synth:stack:branch": "NODE_ENV=branch cdk synth CelebritiesStack",
+    "synth:stack:test": "NODE_ENV=test cdk synth Agw",
+    "synth:stack:prod": "NODE_ENV=prod cdk synth Agw",
+    "synth:stack:staging": "NODE_ENV=staging cdk synth Agw",
+    "synth:stack:branch": "NODE_ENV=branch cdk synth Agw",
 
-    "deploy:stack:test": "NODE_ENV=test cdk deploy --require-approval never CelebritiesStack",
-    "deploy:stack:prod": "NODE_ENV=prod cdk deploy --require-approval never CelebritiesStack",
-    "deploy:stack:staging": "NODE_ENV=staging cdk deploy --require-approval never CelebritiesStack",
-    "deploy:stack:branch": "NODE_ENV=branch cdk deploy --require-approval never CelebritiesStack"
+    "deploy:stack:test": "NODE_ENV=test cdk deploy --require-approval never Agw",
+    "deploy:stack:prod": "NODE_ENV=prod cdk deploy --require-approval never Agw",
+    "deploy:stack:staging": "NODE_ENV=staging cdk deploy --require-approval never Agw",
+    "deploy:stack:branch": "NODE_ENV=branch cdk deploy --require-approval never Agw"
   },
 
   "devDependencies": {

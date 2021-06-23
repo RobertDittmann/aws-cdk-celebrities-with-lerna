@@ -4,6 +4,8 @@
   "license": "ISC",
   "scripts": {
     "ci": "yarn install",
+    "graph": "lerna-dependency-graph",
+
     "synth:pipeline:test": "lerna run synth:pipeline:test --stream --",
     "synth:pipeline:prod": "lerna run synth:pipeline:prod --stream --",
     "synth:pipeline:staging": "lerna run synth:pipeline:test --stream --",

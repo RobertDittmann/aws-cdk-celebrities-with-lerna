@@ -6,10 +6,6 @@
     "awsCdkCodePipeline": "stack/bin/awsCdkCodePipeline.js"
   },
   "scripts": {
-    "build": "tsc",
-    "watch": "tsc -w",
-    "test": "jest",
-    "cdk": "cdk",
     "synth:pipeline:test": "NODE_ENV=test cdk synth AwsCdkCodePipelineStack",
     "synth:pipeline:prod": "NODE_ENV=prod cdk synth AwsCdkCodePipelineStack",
     "synth:pipeline:staging": "NODE_ENV=staging cdk synth AwsCdkCodePipelineStack",

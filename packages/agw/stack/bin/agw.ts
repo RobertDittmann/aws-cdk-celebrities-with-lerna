@@ -16,7 +16,7 @@ if (!ENV_NAME) {
     throw Error(`ENV_NAME not defined !!!`)
 }
 
-new AgwStack(app, 'CelebritiesStack', {
+new AgwStack(app, 'Agw', {
     envName: ENV_NAME
 });
 
