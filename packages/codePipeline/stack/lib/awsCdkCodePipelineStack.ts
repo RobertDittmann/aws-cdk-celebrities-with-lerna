@@ -5,7 +5,7 @@ import {GithubAction} from "./codepipeline/action/source/githubAction";
 import {RebuildPipeline} from "./codepipeline/action/codebuild/rebuildPipeline";
 import * as codepipeline from "@aws-cdk/aws-codepipeline";
 import {BuildCelebritiesRekognitionStack} from "./codepipeline/action/codebuild/buildCelebritiesRekognitionStack";
-import {EndpointLambda} from "./codepipeline/action/codebuild/endpointLambda";
+import {LambdaBuildAndTest} from "./codepipeline/action/codebuild/lambdaBuildAndTest";
 import {BuildAgwStack} from "./codepipeline/action/codebuild/buildAgwStack";
 
 
@@ -52,18 +52,18 @@ export class AwsCdkCodePipelineStack extends Stack {
             repoSecretName: `${props?.repoSecretName}`
         });
 
-        // const endpointLambdaBuild = new EndpointLambda(this, 'EndpointLambdaBuild', {
-        //     source: githubAction.source,
-        //     envName: `${props?.envName}`
-        // })
-        //
-        // // STACKS
-        // const deployCelebritiesRekognitionStack = new BuildCelebritiesRekognitionStack(this, 'DeployCelebritiesRekognition', {
-        //     role: pipelineRoles.adminRoleForCodeBuild,
-        //     envName: `${props?.envName}`,
-        //     source: githubAction.source,
-        // });
-        //
+        const lambdaBuildAndTest = new LambdaBuildAndTest(this, 'EndpointLambdaBuild', {
+            source: githubAction.source,
+            envName: `${props?.envName}`
+        });
+
+        // STACKS
+        const deployCelebritiesRekognitionStack = new BuildCelebritiesRekognitionStack(this, 'DeployCelebritiesRekognition', {
+            role: pipelineRoles.adminRoleForCodeBuild,
+            envName: `${props?.envName}`,
+            source: githubAction.source,
+        });
+
         // const buildAgwStack = new BuildAgwStack(this, 'DeployAgw', {
         //     source: githubAction.source,
         //     role: pipelineRoles.adminRoleForCodeBuild,
@@ -87,19 +87,19 @@ export class AwsCdkCodePipelineStack extends Stack {
                         updatePipeline.action
                     ],
                 },
-                // {
-                //     stageName: 'Build',
-                //     actions: [
-                //         endpointLambdaBuild.action
-                //     ],
-                // },
-                // {
-                //     stageName: 'Deploy',
-                //     actions: [
-                //         deployCelebritiesRekognitionStack.action,
-                //         buildAgwStack.action
-                //     ],
-                // }
+                {
+                    stageName: 'Build_and_Test',
+                    actions: [
+                        lambdaBuildAndTest.action
+                    ],
+                },
+                {
+                    stageName: 'Deploy',
+                    actions: [
+                        deployCelebritiesRekognitionStack.action,
+                        // buildAgwStack.action
+                    ],
+                }
             ],
 
         });

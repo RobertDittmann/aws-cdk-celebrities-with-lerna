@@ -18,14 +18,14 @@ export class BuildCelebritiesRekognitionProject extends Construct {
                 version: '0.2',
                 phases: {
                     install: {
-                        commands: 'npm install',
+                        commands: [
+                            'yarn run ci'
+                        ],
                     },
                     build: {
                         commands: [
-                            'npm run build',
-                            'echo $ENV_NAME',
-                            `npm run cdk synth CelebritiesRekognitionStack`,
-                            `npm run cdk-no-approval CelebritiesRekognitionStack`, // without parameters cause taken from environment
+                            `yarn synth:stack:${props.envName}`,
+                            `yarn deploy:stack:${props.envName}`,
                         ],
                     },
                 },
@@ -33,10 +33,7 @@ export class BuildCelebritiesRekognitionProject extends Construct {
             environment: {
                 buildImage: codebuild.LinuxBuildImage.STANDARD_5_0,
             },
-            role: props.role,
-            environmentVariables: {
-                ENV_NAME: {value: props.envName},
-            } // to always rebuilt for the same environment !!
+            role: props.role
         });
     }
 }

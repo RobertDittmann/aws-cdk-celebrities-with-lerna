@@ -11,10 +11,14 @@
     "deploy:pipeline:test": "lerna run deploy:pipeline:test --stream --",
     "deploy:pipeline:prod": "lerna run deploy:pipeline:prod --stream --",
     "deploy:pipeline:staging": "lerna run deploy:pipeline:test --stream --",
-    "deploy:pipeline:branch": "lerna run deploy:pipeline:prod --stream --"
+    "deploy:pipeline:branch": "lerna run deploy:pipeline:prod --stream --",
+    "build:lambda": "lerna run build:lambda --stream --parallel --",
+    "test:lambda": "lerna run test:lambda --stream --parallel --"
   },
   "workspaces": [
-    "packages/*",
-    "packages/common/*"
-  ]
+    "packages/**"
+  ],
+  "dependencies": {
+    "@bright-blue/common-config": "1.0.0"
+  }
 }

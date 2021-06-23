@@ -1,0 +1,15 @@
+{
+  "name": "celebrieties-endpoint",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:lambda": "echo BUILD-endpoint",
+    "test:lambda": "echo TEST-endpoint"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "random": "^3.0.6"
+  }
+}

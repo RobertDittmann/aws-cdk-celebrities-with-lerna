@@ -1,0 +1,31 @@
+{
+  "name": "celebrities",
+  "version": "1.0.0",
+  "private": true,
+  "description": "> TODO: description",
+  "author": "Robert Dittmann <robert.dittmann@merapar.com>",
+  "homepage": "https://github.com/RobertDittmann/aws-cdk-celebrities-with-lerna#readme",
+  "license": "ISC",
+  "main": "lib/celebrities.js",
+
+  "scripts": {
+    "synth:stack:test": "NODE_ENV=test cdk synth AwsCdkCodePipelineStack",
+    "synth:stack:prod": "NODE_ENV=prod cdk synth AwsCdkCodePipelineStack",
+    "synth:stack:staging": "NODE_ENV=staging cdk synth AwsCdkCodePipelineStack",
+    "synth:stack:branch": "NODE_ENV=branch cdk synth AwsCdkCodePipelineStack",
+    "deploy:stack:test": "NODE_ENV=test cdk deploy --require-approval never AwsCdkCodePipelineStack",
+    "deploy:stack:prod": "NODE_ENV=prod cdk deploy --require-approval never AwsCdkCodePipelineStack",
+    "deploy:stack:staging": "NODE_ENV=staging cdk deploy --require-approval never AwsCdkCodePipelineStack",
+    "deploy:stack:branch": "NODE_ENV=branch cdk deploy --require-approval never AwsCdkCodePipelineStack"
+  },
+
+  "devDependencies": {
+    "@bright-blue/aws-cdk-config": "1.0.0",
+    "@bright-blue/common-config": "1.0.0",
+    "aws-lambda-nodejs-esbuild": "^1.1.5"
+  },
+  "dependencies": {
+    "@bright-blue/aws-cdk-config": "1.0.0",
+    "@bright-blue/common-config": "1.0.0"
+  }
+}
