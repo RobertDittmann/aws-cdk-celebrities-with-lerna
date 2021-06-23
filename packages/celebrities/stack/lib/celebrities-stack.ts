@@ -49,7 +49,11 @@ export class CelebritiesStack extends cdk.Stack {
                 environment: {
                     'TABLE_NAME': table.tableName
                 },
-                functionName: props.envName + '-generator'
+                functionName: props.envName + '-generator',
+            exclude: [
+                'packages/celebrities/functions/endpoint/*'
+            ],
+            timeout: cdk.Duration.seconds(5)
         });
 
         const endpointFunction = new NodejsFunction(this, 'LambdaEndpoint', {
@@ -58,7 +62,11 @@ export class CelebritiesStack extends cdk.Stack {
             environment: {
                 'TABLE_NAME': table.tableName
             },
-            functionName: props.envName + '-endpoint'
+            functionName: props.envName + '-endpoint',
+            exclude: [
+                'packages/celebrities/functions/generator/*'
+            ],
+            timeout: cdk.Duration.seconds(5)
         });
         // const generatorFunction = new lambda.Function(this, 'LambdaGenerator', {
         //     runtime: lambda.Runtime.NODEJS_14_X,
