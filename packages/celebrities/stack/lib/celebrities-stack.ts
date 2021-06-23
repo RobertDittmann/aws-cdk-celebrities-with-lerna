@@ -11,6 +11,7 @@ import {Effect} from '@aws-cdk/aws-iam';
 import {S3EventSource} from '@aws-cdk/aws-lambda-event-sources';
 import * as ssm from '@aws-cdk/aws-ssm';
 import { NodejsFunction } from 'aws-lambda-nodejs-esbuild';
+import * as path from "path";
 
 
 export interface CelebritiesRekognitionStackProps extends StackProps {
@@ -45,26 +46,28 @@ export class CelebritiesStack extends cdk.Stack {
         // LAMBDAS
         const generatorFunction = new NodejsFunction(this, 'LambdaGenerator', {
                 runtime: lambda.Runtime.NODEJS_14_X,
-                handler: 'packages/celebrities/functions/generator/src/generator.handler',
+                handler: 'packages/celebrities/lambdas/generator/src/generator.handler',
                 environment: {
                     'TABLE_NAME': table.tableName
                 },
                 functionName: props.envName + '-generator',
             exclude: [
-                'packages/celebrities/functions/endpoint/*'
+                'aws-sdk',
+                'endpoint.js'
             ],
             timeout: cdk.Duration.seconds(5)
         });
 
         const endpointFunction = new NodejsFunction(this, 'LambdaEndpoint', {
             runtime: lambda.Runtime.NODEJS_14_X,
-            handler: 'packages/celebrities/functions/endpoint/src/endpoint.handler',
+            handler: 'packages/celebrities/lambdas/endpoint/src/endpoint.handler',
             environment: {
                 'TABLE_NAME': table.tableName
             },
             functionName: props.envName + '-endpoint',
             exclude: [
-                'packages/celebrities/functions/generator/*'
+                'aws-sdk',
+                'generator.js'
             ],
             timeout: cdk.Duration.seconds(5)
         });
