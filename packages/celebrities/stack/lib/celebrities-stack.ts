@@ -10,8 +10,7 @@ import * as iam from '@aws-cdk/aws-iam';
 import {Effect} from '@aws-cdk/aws-iam';
 import {S3EventSource} from '@aws-cdk/aws-lambda-event-sources';
 import * as ssm from '@aws-cdk/aws-ssm';
-import { NodejsFunction } from 'aws-lambda-nodejs-esbuild';
-import * as path from "path";
+import {NodejsFunction} from 'aws-lambda-nodejs-esbuild';
 
 
 export interface CelebritiesRekognitionStackProps extends StackProps {
@@ -45,32 +44,30 @@ export class CelebritiesStack extends cdk.Stack {
 
         // LAMBDAS
         const generatorFunction = new NodejsFunction(this, 'LambdaGenerator', {
-                runtime: lambda.Runtime.NODEJS_14_X,
-                handler: 'packages/celebrities/lambdas/generator/src/generator.handler',
-                environment: {
-                    'TABLE_NAME': table.tableName
-                },
-                functionName: props.envName + '-generator',
+            runtime: lambda.Runtime.NODEJS_14_X,
+            handler: 'packages/celebrities/lambdas/generator/src/generator.handler',
+            environment: {
+                'TABLE_NAME': table.tableName
+            },
+            functionName: props.envName + '-generator',
             exclude: [
-                'aws-sdk',
-                'endpoint.js'
+                'aws-sdk'
             ],
             timeout: cdk.Duration.seconds(5)
         });
 
-        const endpointFunction = new NodejsFunction(this, 'LambdaEndpoint', {
-            runtime: lambda.Runtime.NODEJS_14_X,
-            handler: 'packages/celebrities/lambdas/endpoint/src/endpoint.handler',
-            environment: {
-                'TABLE_NAME': table.tableName
-            },
-            functionName: props.envName + '-endpoint',
-            exclude: [
-                'aws-sdk',
-                'generator.js'
-            ],
-            timeout: cdk.Duration.seconds(5)
-        });
+        // const endpointFunction = new NodejsFunction(this, 'LambdaEndpoint', {
+        //     runtime: lambda.Runtime.NODEJS_14_X,
+        //     handler: 'packages/celebrities/lambdas/endpoint/src/endpoint.handler',
+        //     environment: {
+        //         'TABLE_NAME': table.tableName
+        //     },
+        //     functionName: props.envName + '-endpoint',
+        //     exclude: [
+        //         'aws-sdk'
+        //     ],
+        //     timeout: cdk.Duration.seconds(5)
+        // });
         // const generatorFunction = new lambda.Function(this, 'LambdaGenerator', {
         //     runtime: lambda.Runtime.NODEJS_14_X,
         //     handler: 'generator.handler',
@@ -81,15 +78,15 @@ export class CelebritiesStack extends cdk.Stack {
         //     functionName: props.envName + '-generator'
         // });
         //
-        // const endpointFunction = new lambda.Function(this, 'LambdaEndpoint', {
-        //     runtime: lambda.Runtime.NODEJS_14_X,
-        //     handler: 'endpoint.handler',
-        //     code: lambda.Code.fromAsset('./functions/endpoint/src'),
-        //     environment: {
-        //         'TABLE_NAME': table.tableName
-        //     },
-        //     functionName: props.envName + '-endpoint',
-        // });
+        const endpointFunction = new lambda.Function(this, 'LambdaEndpoint', {
+            runtime: lambda.Runtime.NODEJS_14_X,
+            handler: 'endpoint.handler',
+            code: lambda.Code.fromAsset('packages/celebrities/lambdas/endpoint/dist/index.js'),
+            environment: {
+                'TABLE_NAME': table.tableName
+            },
+            functionName: props.envName + '-endpoint',
+        });
 
         bucket.grantRead(generatorFunction);
 
