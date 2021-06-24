@@ -14,6 +14,7 @@ const BRANCH_NAME = process.env.BRANCH_NAME ? process.env.BRANCH_NAME : '';
 const REPO = process.env.REPO ? process.env.REPO : '';
 const REPO_OWNER = process.env.REPO_OWNER ? process.env.REPO_OWNER : '';
 const REPO_SECRET_NAME = process.env.REPO_SECRET_NAME ? process.env.REPO_SECRET_NAME : '';
+const UPDATE_PIPELINE_STAGE = process.env.UPDATE_PIPELINE_STAGE === 'true';
 
 
 const app = new cdk.App();
@@ -35,7 +36,8 @@ new AwsCdkCodePipelineStack(app, 'AwsCdkCodePipelineStack', {
     branchName: BRANCH_NAME,
     repo: REPO,
     repoOwner: REPO_OWNER,
-    repoSecretName: REPO_SECRET_NAME
+    repoSecretName: REPO_SECRET_NAME,
+    updatePipelineStage: UPDATE_PIPELINE_STAGE
 });
 
 app.synth();

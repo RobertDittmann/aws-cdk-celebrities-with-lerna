@@ -15,6 +15,7 @@ export interface AwsCdkPipelineCelebritiesStackProps extends StackProps {
     readonly repo: string;
     readonly repoOwner: string;
     readonly repoSecretName: string;
+    readonly updatePipelineStage: boolean;
 }
 
 export class AwsCdkCodePipelineStack extends Stack {
@@ -77,7 +78,7 @@ export class AwsCdkCodePipelineStack extends Stack {
             ],
         });
 
-        if (props?.envName !== 'prod' && props?.envName !== 'staging') {
+        if (props?.updatePipelineStage) {
             pipeline.addStage({
                 stageName: 'Pipeline_Update',
                 actions: [
