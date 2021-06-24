@@ -2,7 +2,6 @@ import {Construct} from '@aws-cdk/core';
 import * as codepipeline from '@aws-cdk/aws-codepipeline';
 import * as codepipeline_actions from "@aws-cdk/aws-codepipeline-actions";
 import * as iam from '@aws-cdk/aws-iam';
-import {DeployStacksProject} from "./project/deployStacksProject";
 import {BuildAgwProject} from "./project/buildAGWProject";
 
 export interface BuildAgwStackProps {

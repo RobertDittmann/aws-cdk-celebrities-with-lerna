@@ -24,6 +24,7 @@ export class DeployStacksProject extends Construct {
                     },
                     build: {
                         commands: [
+                            'yarn build:lambda',
                             `yarn synth:stack:${props.envName}`,
                             `yarn deploy:stack:${props.envName}`,
                         ],

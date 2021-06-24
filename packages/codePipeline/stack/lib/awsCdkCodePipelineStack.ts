@@ -6,7 +6,6 @@ import {RebuildPipeline} from "./codepipeline/action/codebuild/rebuildPipeline";
 import * as codepipeline from "@aws-cdk/aws-codepipeline";
 import {DeployStacks} from "./codepipeline/action/codebuild/deployStacks";
 import {LambdaBuildAndTest} from "./codepipeline/action/codebuild/lambdaBuildAndTest";
-import {BuildAgwStack} from "./codepipeline/action/codebuild/buildAgwStack";
 
 
 export interface AwsCdkPipelineCelebritiesStackProps extends StackProps {
@@ -71,7 +70,7 @@ export class AwsCdkCodePipelineStack extends Stack {
             role: pipelineRoles.adminRoleForCodePipeline
         });
 
-       pipeline.addStage({
+        pipeline.addStage({
             stageName: 'Source',
             actions: [
                 githubAction.action
@@ -88,7 +87,7 @@ export class AwsCdkCodePipelineStack extends Stack {
         }
 
         pipeline.addStage({
-            stageName: 'Build_and_Test',
+            stageName: 'Test',
             actions: [
                 lambdaBuildAndTest.action
             ],
