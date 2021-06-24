@@ -13,7 +13,7 @@ module.exports = {
                 use: 'ts-loader',
                 include: [ // specify where typescript files should be
                     path.resolve(__dirname, 'src'),
-                ],
+                ]
             },
         ],
     },

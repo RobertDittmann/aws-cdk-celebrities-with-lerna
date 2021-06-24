@@ -82,7 +82,7 @@ export class CelebritiesStack extends cdk.Stack {
         //
         const endpointFunction = new lambda.Function(this, 'LambdaEndpoint', {
             runtime: lambda.Runtime.NODEJS_14_X,
-            handler: 'endpoint.handler',
+            handler: 'index.handler',
             code: lambda.Code.fromAsset(path.join(__dirname, '../../lambdas/endpoint/dist')),
             environment: {
                 'TABLE_NAME': table.tableName
