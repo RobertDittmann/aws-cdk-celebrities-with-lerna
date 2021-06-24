@@ -11,6 +11,7 @@ import {Effect} from '@aws-cdk/aws-iam';
 import {S3EventSource} from '@aws-cdk/aws-lambda-event-sources';
 import * as ssm from '@aws-cdk/aws-ssm';
 import {NodejsFunction} from 'aws-lambda-nodejs-esbuild';
+import * as path from "path";
 
 
 export interface CelebritiesRekognitionStackProps extends StackProps {
@@ -51,9 +52,10 @@ export class CelebritiesStack extends cdk.Stack {
             },
             functionName: props.envName + '-generator',
             exclude: [
-                'aws-sdk'
+                'aws-sdk',
+                'packages/celebrities/lambdas/endpoint'
             ],
-            timeout: cdk.Duration.seconds(5)
+            timeout: cdk.Duration.seconds(5),
         });
 
         // const endpointFunction = new NodejsFunction(this, 'LambdaEndpoint', {
@@ -81,11 +83,11 @@ export class CelebritiesStack extends cdk.Stack {
         const endpointFunction = new lambda.Function(this, 'LambdaEndpoint', {
             runtime: lambda.Runtime.NODEJS_14_X,
             handler: 'endpoint.handler',
-            code: lambda.Code.fromAsset('packages/celebrities/lambdas/endpoint/dist/index.js'),
+            code: lambda.Code.fromAsset(path.join(__dirname, '../../lambdas/endpoint/dist')),
             environment: {
                 'TABLE_NAME': table.tableName
             },
-            functionName: props.envName + '-endpoint',
+            functionName: props.envName + '-endpoint'
         });
 
         bucket.grantRead(generatorFunction);
